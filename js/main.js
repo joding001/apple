@@ -6,7 +6,11 @@ const sceneInfo = [
     scrollHeight: 0,
     objs: {
       container: document.querySelector("#scroll-section-0"),
-    },
+      messageA: document.querySelector("#scroll-section-0 .main-message.a"),
+      messageB: document.querySelector("#scroll-section-0 .main-message.b"),
+      messageC: document.querySelector("#scroll-section-0 .main-message.c"),
+      messageD: document.querySelector("#scroll-section-0 .main-message.d"),
+    }
   },
   {
     // 1
@@ -39,15 +43,16 @@ const sceneInfo = [
 
 setLayout();
 scrollLoop();
+setInterval(playAnimation, 1);
 
-window.addEventListener('resize', function(){
-  setLayout()
-});
+window.addEventListener('resize', setLayout);
 
 function setLayout() {
   for (let i = 0; i < 4; i++) {
-    sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
-    sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+    if (!(sceneInfo[i].type == 'normal'))  {
+      sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
+      sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+    }
   }
 }
 
@@ -71,7 +76,7 @@ function scrollLoop() {
 function calcValues() {
   scrollPx = window.scrollY;
   for (let i = 0; i < 4; i++) {
-    if ( window.scrollY >= sceneInfo[i].scrollHeight ) {
+    if ( scrollPx >= sceneInfo[i].scrollHeight ) {
       scrollPx -= sceneInfo[i].scrollHeight;
     }
   }
@@ -79,7 +84,76 @@ function calcValues() {
 }
 
 function playAnimation() {
-  
+  if (document.body.id == 'show-scene-0') {
+    // A
+    if (calcValues() / sceneInfo[0].scrollHeight >= 0.1 && calcValues() / sceneInfo[0].scrollHeight < 0.2) {
+      sceneInfo[0].objs.messageA.style.opacity = (calcValues() / sceneInfo[0].scrollHeight - 0.1) * 10;
+      sceneInfo[0].objs.messageA.style.transform = `translate(0, ${20 - (calcValues() / sceneInfo[0].scrollHeight - 0.1) * 200}px)`;
+    } else if (calcValues() / sceneInfo[0].scrollHeight < 0.1) {
+      sceneInfo[0].objs.messageA.style.opacity = 0;
+      sceneInfo[0].objs.messageA.style.transform = 'translate(0, 0)';
+    }
+    if (calcValues() / sceneInfo[0].scrollHeight >= 0.25 && calcValues() / sceneInfo[0].scrollHeight < 0.3) {
+      sceneInfo[0].objs.messageA.style.opacity = 1 - (calcValues() / sceneInfo[0].scrollHeight - 0.25) * 20;
+      sceneInfo[0].objs.messageA.style.transform = `translate(0, ${0 - (calcValues() / sceneInfo[0].scrollHeight - 0.25) * 400}px)`;
+    } else if (calcValues() / sceneInfo[0].scrollHeight > 0.3) {
+      sceneInfo[0].objs.messageA.style.opacity = 0;
+      sceneInfo[0].objs.messageA.style.transform = 'translate(0, 0)';
+    }
+
+    // B
+    if (calcValues() / sceneInfo[0].scrollHeight >= 0.3 && calcValues() / sceneInfo[0].scrollHeight < 0.4) {
+      sceneInfo[0].objs.messageB.style.opacity = (calcValues() / sceneInfo[0].scrollHeight - 0.3) * 10;
+      sceneInfo[0].objs.messageB.style.transform = `translate(0, ${20 - (calcValues() / sceneInfo[0].scrollHeight - 0.3) * 200}px)`;
+    } else if (calcValues() / sceneInfo[0].scrollHeight < 0.3) {
+      sceneInfo[0].objs.messageB.style.opacity = 0;
+      sceneInfo[0].objs.messageB.style.transform = 'translate(0, 0)';
+    }
+    if (calcValues() / sceneInfo[0].scrollHeight >= 0.45 && calcValues() / sceneInfo[0].scrollHeight < 5) {
+      sceneInfo[0].objs.messageB.style.opacity = 1 - (calcValues() / sceneInfo[0].scrollHeight - 0.45) * 20;
+      sceneInfo[0].objs.messageB.style.transform = `translate(0, ${0 - (calcValues() / sceneInfo[0].scrollHeight - 0.45) * 400}px)`;
+    } else if (calcValues() / sceneInfo[0].scrollHeight > 0.5) {
+      sceneInfo[0].objs.messageB.style.opacity = 0;
+      sceneInfo[0].objs.messageB.style.transform = 'translate(0, 0)';
+    }
+
+    // C
+    if (calcValues() / sceneInfo[0].scrollHeight >= 0.5 && calcValues() / sceneInfo[0].scrollHeight < 0.6) {
+      sceneInfo[0].objs.messageC.style.opacity = (calcValues() / sceneInfo[0].scrollHeight - 0.5) * 10;
+      sceneInfo[0].objs.messageC.style.transform = `translate(0, ${20 - (calcValues() / sceneInfo[0].scrollHeight - 0.5) * 200}px)`;
+    } else if (calcValues() / sceneInfo[0].scrollHeight < 0.5) {
+      sceneInfo[0].objs.messageC.style.opacity = 0;
+      sceneInfo[0].objs.messageC.style.transform = 'translate(0, 0)';
+    }
+    if (calcValues() / sceneInfo[0].scrollHeight >= 0.65 && calcValues() / sceneInfo[0].scrollHeight < 0.7) {
+      sceneInfo[0].objs.messageC.style.opacity = 1 - (calcValues() / sceneInfo[0].scrollHeight - 0.65) * 20;
+      sceneInfo[0].objs.messageC.style.transform = `translate(0, ${0 - (calcValues() / sceneInfo[0].scrollHeight - 0.65) * 400}px)`;
+    } else if (calcValues() / sceneInfo[0].scrollHeight > 0.7) {
+      sceneInfo[0].objs.messageC.style.opacity = 0;
+      sceneInfo[0].objs.messageC.style.transform = 'translate(0, 0)';
+    }
+
+    // D
+    if (calcValues() / sceneInfo[0].scrollHeight >= 0.7 && calcValues() / sceneInfo[0].scrollHeight < 0.8) {
+      sceneInfo[0].objs.messageD.style.opacity = (calcValues() / sceneInfo[0].scrollHeight - 0.7) * 10;
+      sceneInfo[0].objs.messageD.style.transform = `translate(0, ${20 - (calcValues() / sceneInfo[0].scrollHeight - 0.7) * 200}px)`;
+    } else if (calcValues() / sceneInfo[0].scrollHeight < 0.7) {
+      sceneInfo[0].objs.messageD.style.opacity = 0;
+      sceneInfo[0].objs.messageD.style.transform = 'translate(0, 0)';
+    }
+    if (calcValues() / sceneInfo[0].scrollHeight >= 0.85 && calcValues() / sceneInfo[0].scrollHeight < 0.9) {
+      sceneInfo[0].objs.messageD.style.opacity = 1 - (calcValues() / sceneInfo[0].scrollHeight - 0.85) * 20;
+      sceneInfo[0].objs.messageD.style.transform = `translate(0, ${0 - (calcValues() / sceneInfo[0].scrollHeight - 0.85) * 400}px)`;
+    } else if (calcValues() / sceneInfo[0].scrollHeight > 0.9) {
+      sceneInfo[0].objs.messageD.style.opacity = 0;
+      sceneInfo[0].objs.messageD.style.transform = 'translate(0, 0)';
+    }
+  }
+  if (document.body.id == 'show-scene-0') {
+    document.querySelector('#AirPodsVideo').style.backgroundImage = `url(video/001/${(Math.round(calcValues() / sceneInfo[0].scrollHeight / (1 / 66))).toString().padStart(4, '0')}.png)`;
+  } else {
+    document.querySelector('#AirPodsVideo').style.backgroundImage = 'none';
+  }
 }
 
 /* 
