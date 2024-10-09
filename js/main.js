@@ -37,6 +37,51 @@ const sceneInfo = [
   },
 ];
 
+setLayout();
+scrollLoop();
+
+window.addEventListener('resize', function(){
+  setLayout()
+});
+
+function setLayout() {
+  for (let i = 0; i < 4; i++) {
+    sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
+    sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+  }
+}
+
+function scrollLoop() {
+  for (let i = 0; i < 4; i++) {
+    const position = sceneInfo[i].objs.container.getBoundingClientRect();
+    if (position.top <= 0 && position.bottom > 0) {
+      document.body.id = `show-scene-${i}`
+    }
+  } 
+  window.addEventListener('scroll', function() {
+    for (let i = 0; i < 4; i++) {
+      const position = sceneInfo[i].objs.container.getBoundingClientRect();
+      if (position.top <= 0 && position.bottom > 0) {
+        document.body.id = `show-scene-${i}`
+      }
+    } 
+  });
+}
+
+function calcValues() {
+  scrollPx = window.scrollY;
+  for (let i = 0; i < 4; i++) {
+    if ( window.scrollY >= sceneInfo[i].scrollHeight ) {
+      scrollPx -= sceneInfo[i].scrollHeight;
+    }
+  }
+  return scrollPx;
+}
+
+function playAnimation() {
+  
+}
+
 /* 
   1. 각 섹션에 대한 정보를 담은 배열을 만드세요.
   각 섹션에 대한 정보는 다음과 같습니다.
