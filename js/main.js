@@ -29,6 +29,13 @@ const sceneInfo = [
     objs: {
       container: document.querySelector("#scroll-section-2"),
     },
+    objs: {
+      container: document.querySelector("#scroll-section-2"),
+      messageA: document.querySelector("#scroll-section-2 .main-message.a"),
+      messageB: document.querySelector("#scroll-section-2 .main-message.b"),
+      messageC: document.querySelector("#scroll-section-2 .main-message.c"),
+      messageD: document.querySelector("#scroll-section-2 .main-message.d"),
+    }
   },
   {
     // 3
@@ -150,9 +157,12 @@ function playAnimation() {
     }
   }
   if (document.body.id == 'show-scene-0') {
-    document.querySelector('#AirPodsVideo').style.backgroundImage = `url(video/001/${(Math.round(calcValues() / sceneInfo[0].scrollHeight / (1 / 66))).toString().padStart(4, '0')}.png)`;
-  } else {
-    document.querySelector('#AirPodsVideo').style.backgroundImage = 'none';
+    document.querySelector('#video-canvas-0').style.backgroundImage = `url(video/001/${(Math.round(calcValues() / sceneInfo[0].scrollHeight / (1 / 66))).toString().padStart(4, '0')}.png)`;
+  } else if (document.body.id != 'show-scene-0') {
+    document.querySelector('#video-canvas-0').style.backgroundImage = 'none';
+  }
+  if (document.body.id == 'show-scene-2') {
+    document.querySelector('#video-canvas-1').style.backgroundImage = `url(video/002/large_${(Math.round(calcValues() / sceneInfo[2].scrollHeight / (1 / 114))).toString().padStart(5, '0')}.jpg)`;
   }
 }
 
